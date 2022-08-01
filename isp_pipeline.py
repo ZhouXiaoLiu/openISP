@@ -217,8 +217,8 @@ print(50*'-' + '\nAnti-aliasing Filtering Done......')
 #plt.show()
 
 #rawimg_diff = rawimg_blc - rawimg_aaf
-#plt.imshow(rawimg_diff, cmap='gray')
-#plt.show()
+##plt.imshow(rawimg_diff, cmap='gray')
+##plt.show()
 
 # white balance gain control
 parameter = [r_gain, gr_gain, gb_gain, b_gain]
@@ -300,7 +300,7 @@ print(50*'-' + '\nEdge Enhancement Done......')
 fcs = FCS(yuvimg_csc[:,:,1:3], yuvimg_edgemap, fcs_edge, fcs_gain, fcs_intercept, fcs_slope)
 yuvimg_fcs = fcs.execute()
 print(50*'-' + '\nFalse Color Suppresion Done......')
-#plt.imshow(yuvimg_fcs)
+#plt.imshow(yuvimg_fcs) #invalid shape (1080, 1920, 2) for image data
 #plt.show()
 
 # hue/saturation control
@@ -315,11 +315,11 @@ contrast = contrast / pow(2,5)    #[-32,128]
 bcc = BCC(yuvimg_ee, brightness, contrast, bcc_clip)
 yuvimg_bcc = bcc.execute()
 print(50*'-' + '\nBrightness/Contrast Adjustment Done......')
-#plt.imshow(yuvimg_bcc)
-#plt.show()
+plt.imshow(yuvimg_bcc)
+plt.show()
 
 yuvimg_out = np.empty((raw_h, raw_w, 3), dtype=np.uint8)
 yuvimg_out[:,:,0] = yuvimg_bcc
 yuvimg_out[:,:,1:3] = yuvimg_hsc
-#plt.imshow(yuvimg_out)
-#plt.show()
+plt.imshow(yuvimg_out)
+plt.show()
